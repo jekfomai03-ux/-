@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<title>Бамбл | Сеть кофеен во Владикавказе</title>
+	<meta name="description" content="Бамбл — сеть кофеен во Владикавказе. Авторский кофе, десерты, уютные залы и кофе с собой. Адреса, режим работы и актуальные контакты.">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Бамбл | Сеть кофеен во Владикавказе">
+	<meta property="og:description" content="Уютные кофейни Бамбл во Владикавказе: классический и авторский кофе, десерты, удобные локации в городе.">
+	<meta property="og:locale" content="ru_RU">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Бамбл | Сеть кофеен во Владикавказе">
+	<meta name="twitter:description" content="Кофейни Бамбл во Владикавказе: меню, адреса, режим работы и контакты.">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+			background-color: #fefaf5;
+			color: #2c2b28;
+			line-height: 1.5;
+			scroll-behavior: smooth;
+		}
+
+		/* Жёлтый акцент */
+		:root {
+			--yellow: #F3B33D;
+			--yellow-dark: #e09d1c;
+			--dark: #2c2b28;
+			--gray: #5a5a5a;
+			--light-gray: #f0ede8;
+		}
+
+		/* Шапка */
+		header {
+			background-color: white;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+			position: sticky;
+			top: 0;
+			z-index: 100;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 0 20px;
+		}
+
+		.header-flex {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 5px 0;
+			flex-wrap: wrap;
+		}
+
+		.logo-area {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.logo {
+			height: 80px;
+			width: 80px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+
+		.brand-name {
+			font-size: 1.5rem;
+			font-weight: 700;
+			letter-spacing: 1px;
+			color: var(--dark);
+		}
+		.brand-name span {
+			color: var(--yellow);
+		}
+
+		/* Навигация */
+		nav ul {
+			display: flex;
+			list-style: none;
+			gap: 28px;
+		}
+
+		nav a {
+			text-decoration: none;
+			font-weight: 600;
+			color: var(--dark);
+			transition: color 0.2s;
+			font-size: 1.1rem;
+		}
+
+		nav a:hover {
+			color: var(--yellow);
+		}
+		nav a:focus-visible,
+		.btn:focus-visible,
+		.burger:focus-visible {
+			outline: 3px solid var(--yellow);
+			outline-offset: 2px;
+		}
+
+		/* Бургер-меню (мобильная версия) */
+		.burger {
+			display: none;
+			flex-direction: column;
+			cursor: pointer;
+			gap: 5px;
+			border: none;
+			background: transparent;
+			padding: 4px;
+		}
+
+		.burger span {
+			width: 28px;
+			height: 3px;
+			background-color: var(--dark);
+			border-radius: 3px;
+			transition: 0.2s;
+		}
+
+		/* Секции */
+		section {
+			padding: 70px 0;
+		}
+
+		.section-title {
+			font-size: 2.2rem;
+			text-align: center;
+			margin-bottom: 48px;
+			position: relative;
+			padding-bottom: 15px;
+			color: var(--dark);
+		}
+		.section-title:after {
+			content: '';
+			display: block;
+			width: 70px;
+			height: 4px;
+			background-color: var(--yellow);
+			margin: 12px auto 0;
+			border-radius: 2px;
+		}
+
+		/* Герой / приветствие */
+		.hero {
+			background: linear-gradient(135deg, #fff6e8 0%, #fff 100%);
+			text-align: center;
+		}
+		.hero h1 {
+			font-size: 2.8rem;
+			margin-bottom: 20px;
+			color: var(--dark);
+		}
+		.hero h1 span {
+			color: var(--yellow);
+		}
+		.hero p {
+			font-size: 1.2rem;
+			max-width: 700px;
+			margin: 0 auto 30px;
+			color: var(--gray);
+		}
+		.btn {
+			display: inline-block;
+			background-color: var(--yellow);
+			color: var(--dark);
+			padding: 12px 32px;
+			border-radius: 40px;
+			font-weight: 700;
+			text-decoration: none;
+			transition: 0.2s;
+			border: none;
+			cursor: pointer;
+		}
+		.btn:hover {
+			background-color: var(--yellow-dark);
+			transform: scale(1.02);
+		}
+
+		/* Меню */
+		.menu-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 40px;
+		}
+		.menu-category {
+			background: white;
+			border-radius: 24px;
+			padding: 24px;
+			box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+			transition: 0.2s;
+			border: 1px solid #f0e5d8;
+			max-height: 560px;
+			overflow-y: auto;
+			scrollbar-width: thin;
+			scrollbar-color: #d9c9b6 transparent;
+		}
+		.menu-category.tea-cold-category {
+			grid-column: 1 / -1;
+			max-width: 360px;
+			justify-self: center;
+		}
+		.menu-category::-webkit-scrollbar {
+			width: 8px;
+		}
+		.menu-category::-webkit-scrollbar-thumb {
+			background: #d9c9b6;
+			border-radius: 8px;
+		}
+		.menu-category::-webkit-scrollbar-track {
+			background: transparent;
+		}
+		.menu-category h3 {
+			font-size: 1.8rem;
+			border-left: 6px solid var(--yellow);
+			padding-left: 16px;
+			margin-bottom: 24px;
+			color: var(--dark);
+			position: sticky;
+			top: 0;
+			background: white;
+			padding-top: 4px;
+			padding-bottom: 8px;
+			z-index: 1;
+		}
+		.menu-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+			padding: 12px 0;
+			border-bottom: 1px dashed #e2d9cf;
+		}
+		.item-name {
+			font-weight: 600;
+			font-size: 1.05rem;
+		}
+		.item-price {
+			font-weight: 700;
+			color: var(--yellow-dark);
+			background: #fff0df;
+			padding: 2px 12px;
+			border-radius: 40px;
+			font-size: 0.9rem;
+		}
+		.item-desc {
+			font-size: 0.85rem;
+			color: var(--gray);
+			margin-top: 4px;
+		}
+
+		/* Галерея */
+		.gallery-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			gap: 24px;
+		}
+		.gallery-item {
+			overflow: hidden;
+			border-radius: 20px;
+			box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+			transition: transform 0.3s ease;
+			cursor: pointer;
+			aspect-ratio: 1 / 1;
+			background: #eae2d8;
+		}
+		.gallery-item img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+			transition: transform 0.4s;
+		}
+		.gallery-item:hover img {
+			transform: scale(1.05);
+		}
+
+		/* Контакты */
+		.contacts-wrapper {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 40px;
+			justify-content: space-between;
+		}
+		.contacts-info {
+			flex: 1;
+			min-width: 260px;
+		}
+		.map-container {
+			flex: 1;
+			min-width: 260px;
+			border-radius: 24px;
+			overflow: hidden;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+		}
+		.map-container iframe {
+			display: block;
+			width: 100%;
+			height: 100%;
+			min-height: 320px;
+		}
+		.coffee-card {
+			background: white;
+			border-radius: 24px;
+			padding: 20px;
+			margin-bottom: 24px;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+			border-left: 5px solid var(--yellow);
+		}
+		.coffee-card h4 {
+			font-size: 1.4rem;
+			margin-bottom: 12px;
+			color: var(--dark);
+		}
+		.coffee-card p {
+			margin: 8px 0;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+		.coffee-card i {
+			font-style: normal;
+			font-weight: 600;
+			min-width: 90px;
+			color: var(--gray);
+		}
+		.map-placeholder {
+			flex: 1;
+			background: #eae2d8;
+			border-radius: 24px;
+			min-height: 320px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			color: var(--gray);
+			background-image: url('https://placehold.co/600x400/e2d9cf/5a5a5a?text=Карта+Владикавказа');
+			background-size: cover;
+			background-position: center;
+			font-weight: 500;
+		}
+		.map-placeholder a {
+			background: rgba(0,0,0,0.7);
+			padding: 10px 20px;
+			border-radius: 40px;
+			color: white;
+			text-decoration: none;
+		}
+
+		/* Футер */
+		footer {
+			background-color: #2c2b28;
+			color: #ddd;
+			text-align: center;
+			padding: 30px 0;
+			margin-top: 20px;
+		}
+		.social-links {
+			margin-top: 15px;
+		}
+		.social-links a {
+			color: var(--yellow);
+			margin: 0 12px;
+			text-decoration: none;
+			font-weight: 500;
+		}
+
+		@media (max-width: 768px) {
+			.header-flex {
+				flex-direction: row;
+				justify-content: space-between;
+			}
+			nav ul {
+				display: none;
+				flex-direction: column;
+				background: white;
+				position: absolute;
+				top: 80px;
+				left: 0;
+				width: 100%;
+				padding: 20px;
+				box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+				gap: 18px;
+				text-align: center;
+				z-index: 99;
+			}
+			nav ul.active {
+				display: flex;
+			}
+			.burger {
+				display: flex;
+			}
+			.hero h1 {
+				font-size: 2rem;
+			}
+			.section-title {
+				font-size: 1.8rem;
+			}
+			.contacts-wrapper {
+				flex-direction: column;
+			}
+			.menu-category {
+				max-height: 440px;
+			}
+			.menu-category.tea-cold-category {
+				grid-column: auto;
+				max-width: none;
+				justify-self: stretch;
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<header>
+		<div class="container header-flex">
+			<div class="logo-area">
+				<img class="logo" src="logo.jpg" alt="Логотип Бамбл">
+			</div>
+			<nav>
+				<button class="burger" id="burgerBtn" aria-label="Открыть меню" aria-controls="navMenu" aria-expanded="false" type="button">
+					<span></span><span></span><span></span>
+				</button>
+				<ul id="navMenu">
+					<li><a href="#home">Главная</a></li>
+					<li><a href="#menu">Меню</a></li>
+					<li><a href="#gallery">Галерея</a></li>
+					<li><a href="#contacts">Контакты</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<!-- Главный блок -->
+		<section id="home" class="hero">
+			<div class="container">
+				<h1>Бамбл <span>во Владикавказе</span></h1>
+				<p>Уютные кофейни «Бамбл» — ароматный кофе, авторские десерты и душевная атмосфера. Три точки в городе, где каждый найдёт свой любимый напиток.</p>
+				<a href="#menu" class="btn">Смотреть меню</a>
+			</div>
+		</section>
+
+		<!-- Меню с ценами -->
+		<section id="menu">
+			<div class="container">
+				<h2 class="section-title">Наше меню</h2>
+				<div class="menu-grid">
+					<!-- Кофе -->
+					<div class="menu-category">
+						<h3>☕ Кофе</h3>
+						<div class="menu-item"><span class="item-name">Эспрессо</span><span class="item-price">150 / - ₽</span></div>
+						<div class="menu-item"><span class="item-name">Американо</span><span class="item-price">160 / 180 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Доппио</span><span class="item-price">180 / - ₽</span></div>
+						<div class="menu-item"><span class="item-name">Черный кофе</span><span class="item-price">160 / 180 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Кофе с молоком</span><span class="item-price">170 / 190 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Кофе со сливками</span><span class="item-price">170 / 190 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Мокко</span><span class="item-price">200 / 230 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Раф</span><span class="item-price">200 / 230 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Какао</span><span class="item-price">180 / 210 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Шоколад</span><span class="item-price">200 / 230 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Двойной шоколад</span><span class="item-price">230 / 270 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Орео</span><span class="item-price">210 / 250 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Кокосик</span><span class="item-price">200 / 240 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Малиновый раф</span><span class="item-price">200 / 240 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Фильтр</span><span class="item-price">190 / 210 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Капучино</span><span class="item-price">180 / 210 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Латте</span><span class="item-price">180 / 210 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Флэт уайт</span><span class="item-price">210 / - ₽</span></div>
+					</div>
+
+					<!-- Многообразие Бамбла -->
+					<div class="menu-category">
+						<h3>🍹 Многообразие Бамбла</h3>
+						<div class="menu-item"><span class="item-name">Бамбл</span><span class="item-price">220 / 270 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Бамбл ананас</span><span class="item-price">220 / 270 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Бамбл виноград</span><span class="item-price">220 / 270 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Бамбл вишня</span><span class="item-price">220 / 270 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Бамбл грейпфрут</span><span class="item-price">220 / 270 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Бамбл манго / апельсин</span><span class="item-price">220 / 270 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Бамблбей</span><span class="item-price">220 / 270 ₽</span></div>
+					</div>
+
+					<!-- Авторские -->
+					<div class="menu-category">
+						<h3>✨ Авторские</h3>
+						<div class="menu-item"><span class="item-name">Какао малина в шоколаде</span><span class="item-price">210 / 260 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Латте вкусный миндаль</span><span class="item-price">230 / 280 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Латте дерзкий персик</span><span class="item-price">230 / 280 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Латте лимонный тарт</span><span class="item-price">230 / 280 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Страстная матча латте</span><span class="item-price">230 / 280 ₽</span></div>
+					</div>
+
+					<!-- Чай и холодные напитки -->
+					<div class="menu-category tea-cold-category">
+						<h3>🍵 Чай и холодные напитки</h3>
+						<div class="menu-item"><span class="item-name">Горные травы</span><span class="item-price">160 / 180 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Грушевый</span><span class="item-price">160 / 180 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Зеленый чай</span><span class="item-price">150 / 170 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Имбирный</span><span class="item-price">170 / 190 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Имбирный с медом</span><span class="item-price">180 / 200 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Малиновый</span><span class="item-price">160 / 180 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Мятный чай</span><span class="item-price">170 / 190 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Облепиховый</span><span class="item-price">160 / 180 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Фейхоа</span><span class="item-price">160 / 180 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Фруктовый чай</span><span class="item-price">150 / 170 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Цитрусовый</span><span class="item-price">170 / 190 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Черный чай</span><span class="item-price">150 / 170 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Эрл грэй</span><span class="item-price">150 / 170 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Айс капучино</span><span class="item-price">190 / 220 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Айс латте</span><span class="item-price">190 / 220 ₽</span></div>
+						<div class="menu-item"><span class="item-name">Лимонад</span><span class="item-price">180 / 210 ₽</span></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Галерея -->
+		<section id="gallery" style="background-color: var(--light-gray);">
+			<div class="container">
+				<h2 class="section-title">Фотогалерея</h2>
+				<div class="gallery-grid" id="galleryGrid">
+					<!-- Замените ссылки на ваши реальные фото. Рекомендуется 6-9 изображений -->
+					<div class="gallery-item"><img src="https://via.placeholder.com/600x600/f0e5d8/5a5a5a?text=Интерьер+1" alt="Интерьер кофейни Бамбл" loading="lazy" decoding="async" width="600" height="600"></div>
+					<div class="gallery-item"><img src="https://via.placeholder.com/600x600/e9dfd2/5a5a5a?text=Кофе+в+чашке" alt="Кофе в чашке" loading="lazy" decoding="async" width="600" height="600"></div>
+					<div class="gallery-item"><img src="https://via.placeholder.com/600x600/f3e3cf/5a5a5a?text=Десерты" alt="Витрина с десертами" loading="lazy" decoding="async" width="600" height="600"></div>
+					<div class="gallery-item"><img src="https://via.placeholder.com/600x600/e5d9cb/5a5a5a?text=Уютная+зона" alt="Уютная зона для гостей" loading="lazy" decoding="async" width="600" height="600"></div>
+					<div class="gallery-item"><img src="https://via.placeholder.com/600x600/f2e4d4/5a5a5a?text=Бариста" alt="Бариста готовит кофе" loading="lazy" decoding="async" width="600" height="600"></div>
+					<div class="gallery-item"><img src="https://via.placeholder.com/600x600/f8ede0/5a5a5a?text=Кофейня+снаружи" alt="Фасад кофейни Бамбл" loading="lazy" decoding="async" width="600" height="600"></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Контакты и адреса -->
+		<section id="contacts">
+			<div class="container">
+				<h2 class="section-title">Где мы находимся</h2>
+				<div class="contacts-wrapper">
+					<div class="contacts-info">
+						<div class="coffee-card">
+							<h4>📍 Водная станция</h4>
+							<p><i>🕒 Режим работы:</i> 07:00 – 23:00 (ежедневно)</p>
+							<p><i>📞 Телефон:</i> <a href="tel:+79187016677">+7 (918) 701-66-77</a></p>
+							<!-- <p><i>⭐ Особенность:</i> Уютный зал, бариста помогут с выбором.</p> -->
+						</div>
+						<div class="coffee-card">
+							<h4>📍 Сухое русло</h4>
+							<p><i>🕒 Режим работы:</i> 08:00 – 23:00</p>
+							<p><i>📞 Телефон:</i> <a href="tel:+79187016677">+7 (918) 701-66-77</a></p>
+							<!-- <p><i>⭐ Особенность:</i> Быстрый кофе с собой, зона ожидания.</p> -->
+						</div>
+						<div class="coffee-card">
+							<h4>📍 Проспект мира 12А</h4>
+							<p><i>🕒 Режим работы:</i> 08:00 – 23:00</p>
+							<p><i>📞 Телефон:</i> <a href="tel:+79187016677">+7 (918) 701-66-77</a> (общий)</p>
+							<!-- <p><i>⭐ Особенность:</i> Летом — мороженое и коктейли, большая веранда.</p> -->
+						</div>
+					</div>
+					<div class="map-container" style="flex:1; border-radius:24px; overflow:hidden; min-height:400px;">
+						<iframe 
+						src="https://yandex.ru/map-widget/v1/?ll=44.675%2C43.030&z=14&pt=44.6933%2C43.0280%2Cpm2rdm~44.6830%2C43.0240%2Cpm2rdm~44.6750%2C43.0375%2Cpm2rdm"
+						width="100%" 
+						height="100%" 
+						frameborder="0"
+						style="min-height: 400px; width: 100%;"
+						allowfullscreen="true">
+					</iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+</main>
+
+<footer>
+	<div class="container">
+		<p>© 2026 Бамбл — сеть кофеен во Владикавказе</p>
+		<div class="social-links">
+			<a href="https://www.instagram.com/bamblcoffee?igsh=MWFtd2hwMHJtcGRhbA==" aria-label="Instagram Бамбл">Instagram</a>
+			<a href="#" aria-label="Telegram Бамбл">Telegram</a>
+		</div>
+	</div>
+</footer>
+
+<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "CafeOrCoffeeShop",
+		"name": "Бамбл",
+		"address": {
+			"@type": "PostalAddress",
+			"addressLocality": "Владикавказ",
+			"streetAddress": "ул. Бутырина, 37"
+		},
+		"telephone": "+7 (918) 701-66-77",
+		"servesCuisine": "Coffee",
+		"url": "/"
+	}
+</script>
+
+<!-- Простой скрипт для бургер-меню и галереи (lightbox можно добавить по желанию) -->
+<script>
+    // Бургер-меню
+	const burger = document.getElementById('burgerBtn');
+	const navMenu = document.getElementById('navMenu');
+	const toggleMenu = () => {
+		const isOpen = navMenu.classList.toggle('active');
+		burger.setAttribute('aria-expanded', String(isOpen));
+		burger.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+	};
+	const closeMenu = () => {
+		navMenu.classList.remove('active');
+		burger.setAttribute('aria-expanded', 'false');
+		burger.setAttribute('aria-label', 'Открыть меню');
+	};
+	burger.addEventListener('click', toggleMenu);
+    // Закрытие меню после клика по ссылке
+	document.querySelectorAll('#navMenu a').forEach(link => {
+		link.addEventListener('click', () => {
+			closeMenu();
+		});
+	});
+    // Закрытие меню клавишей Escape
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape') {
+			closeMenu();
+		}
+	});
+
+    // (Опционально) легкий лайтбокс для галереи
+	const galleryItems = document.querySelectorAll('.gallery-item img');
+	galleryItems.forEach(img => {
+		img.addEventListener('click', () => {
+			const overlay = document.createElement('div');
+			overlay.style.position = 'fixed';
+			overlay.style.top = '0';
+			overlay.style.left = '0';
+			overlay.style.width = '100%';
+			overlay.style.height = '100%';
+			overlay.style.backgroundColor = 'rgba(0,0,0,0.85)';
+			overlay.style.display = 'flex';
+			overlay.style.alignItems = 'center';
+			overlay.style.justifyContent = 'center';
+			overlay.style.zIndex = '1000';
+			overlay.style.cursor = 'pointer';
+			const bigImg = document.createElement('img');
+			bigImg.src = img.src;
+			bigImg.style.maxWidth = '90%';
+			bigImg.style.maxHeight = '90%';
+			bigImg.style.borderRadius = '16px';
+			overlay.appendChild(bigImg);
+			document.body.appendChild(overlay);
+			overlay.addEventListener('click', () => {
+				overlay.remove();
+			});
+		});
+	});
+</script>
+</body>
+</html>
